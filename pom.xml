@@ -92,7 +92,7 @@
                     <version>${org.jooq.version}</version>
 
                     <!-- TODO: Possibly edit the code generation configuration here, to reflect what you're doing -->
-                    <configuration>
+                    <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.jooq.org/xsd/jooq-codegen-3.14.0.xsd http://www.jooq.org/xsd/jooq-codegen-3.14.0.xsd">
                         <jdbc>
                             <url>${db.url}</url>
                             <user>${db.username}</user>
@@ -112,7 +112,17 @@
                                     <schema>
                                         <inputSchema>MCVE</inputSchema>
                                     </schema>
+                                    <schema>
+                                        <inputSchema>PUBLIC</inputSchema>
+                                    </schema>
                                 </schemata>
+                                <forcedTypes>
+                                    <forcedType>
+                                        <userType>org.jooq.mcve.java.public_.enums.Enumdomain</userType>
+                                        <enumConverter>true</enumConverter>
+                                        <includeExpression>MCVE\.TEST\.PROBLEMCOLUMN</includeExpression>
+                                    </forcedType>
+                                </forcedTypes>
                             </database>
                             <generate>
                                 <generatedAnnotation>false</generatedAnnotation>
@@ -264,41 +274,6 @@
                         </configuration>
                     </execution>
 
-                    <execution>
-                        <id>generate-kotlin</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-
-                        <configuration>
-                            <generator>
-                                <name>org.jooq.codegen.KotlinGenerator</name>
-                                <target>
-                                    <packageName>org.jooq.mcve.kotlin</packageName>
-                                    <directory>src/main/kotlin</directory>
-                                </target>
-                            </generator>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>generate-scala</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-
-                        <configuration>
-                            <generator>
-                                <name>org.jooq.codegen.ScalaGenerator</name>
-                                <target>
-                                    <packageName>org.jooq.mcve.scala</packageName>
-                                    <directory>src/main/scala</directory>
-                                </target>
-                            </generator>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
         </plugins>

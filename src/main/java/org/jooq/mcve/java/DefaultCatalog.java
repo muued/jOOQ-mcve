@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.jooq.Schema;
 import org.jooq.impl.CatalogImpl;
+import org.jooq.mcve.java.mcve.Mcve;
+import org.jooq.mcve.java.public_.Public;
 
 
 /**
@@ -30,6 +32,11 @@ public class DefaultCatalog extends CatalogImpl {
     public final Mcve MCVE = Mcve.MCVE;
 
     /**
+     * The schema <code>PUBLIC</code>.
+     */
+    public final Public PUBLIC = Public.PUBLIC;
+
+    /**
      * No further instances allowed
      */
     private DefaultCatalog() {
@@ -39,6 +46,7 @@ public class DefaultCatalog extends CatalogImpl {
     @Override
     public final List<Schema> getSchemas() {
         return Arrays.<Schema>asList(
-            Mcve.MCVE);
+            Mcve.MCVE,
+            Public.PUBLIC);
     }
 }
