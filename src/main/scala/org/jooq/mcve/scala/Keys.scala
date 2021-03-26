@@ -8,13 +8,13 @@ import org.jooq.TableField
 import org.jooq.UniqueKey
 import org.jooq.impl.DSL
 import org.jooq.impl.Internal
-import org.jooq.mcve.scala.tables.Test
-import org.jooq.mcve.scala.tables.records.TestRecord
+import org.jooq.mcve.scala.tables.FlywaySchemaHistory
+import org.jooq.mcve.scala.tables.records.FlywaySchemaHistoryRecord
 
 
 /**
  * A class modelling foreign key relationships and constraints of tables in 
- * MCVE.
+ * PUBLIC.
  */
 object Keys {
 
@@ -22,5 +22,5 @@ object Keys {
   // UNIQUE and PRIMARY KEY definitions
   // -------------------------------------------------------------------------
 
-  val PK_TEST: UniqueKey[TestRecord] = Internal.createUniqueKey(Test.TEST, DSL.name("PK_TEST"), Array(Test.TEST.ID).asInstanceOf[Array[TableField[TestRecord, _] ] ], true)
+  val FLYWAY_SCHEMA_HISTORY_PK: UniqueKey[FlywaySchemaHistoryRecord] = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), Array(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK).asInstanceOf[Array[TableField[FlywaySchemaHistoryRecord, _] ] ], true)
 }

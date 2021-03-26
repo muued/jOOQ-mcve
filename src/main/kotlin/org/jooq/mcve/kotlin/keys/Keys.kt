@@ -7,8 +7,8 @@ package org.jooq.mcve.kotlin.keys
 import org.jooq.UniqueKey
 import org.jooq.impl.DSL
 import org.jooq.impl.Internal
-import org.jooq.mcve.kotlin.tables.Test
-import org.jooq.mcve.kotlin.tables.records.TestRecord
+import org.jooq.mcve.kotlin.tables.FlywaySchemaHistory
+import org.jooq.mcve.kotlin.tables.records.FlywaySchemaHistoryRecord
 
 
 
@@ -16,4 +16,4 @@ import org.jooq.mcve.kotlin.tables.records.TestRecord
 // UNIQUE and PRIMARY KEY definitions
 // -------------------------------------------------------------------------
 
-val PK_TEST: UniqueKey<TestRecord> = Internal.createUniqueKey(Test.TEST, DSL.name("PK_TEST"), arrayOf(Test.TEST.ID), true)
+val FLYWAY_SCHEMA_HISTORY_PK: UniqueKey<FlywaySchemaHistoryRecord> = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), arrayOf(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK), true)

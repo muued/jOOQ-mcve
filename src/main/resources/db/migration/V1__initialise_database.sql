@@ -1,10 +1,6 @@
-DROP SCHEMA IF EXISTS mcve CASCADE;
+CREATE DOMAIN domaints AS TIMESTAMP WITH TIME ZONE;
 
-CREATE SCHEMA mcve;
-
-CREATE TABLE mcve.test (
-  id    INT NOT NULL AUTO_INCREMENT,
-  value INT,
-  
-  CONSTRAINT pk_test PRIMARY KEY (id) 
+CREATE TABLE test (
+  domaintsvalue domaints,
+  localtsvalue TIMESTAMP WITH TIME ZONE
 );

@@ -4,12 +4,10 @@
 package org.jooq.mcve.java.tables;
 
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.OffsetDateTime;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row2;
@@ -17,12 +15,10 @@ import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import org.jooq.mcve.java.Keys;
-import org.jooq.mcve.java.Mcve;
+import org.jooq.mcve.java.Public;
 import org.jooq.mcve.java.tables.records.TestRecord;
 
 
@@ -35,7 +31,7 @@ public class Test extends TableImpl<TestRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>MCVE.TEST</code>
+     * The reference instance of <code>PUBLIC.TEST</code>
      */
     public static final Test TEST = new Test();
 
@@ -48,14 +44,14 @@ public class Test extends TableImpl<TestRecord> {
     }
 
     /**
-     * The column <code>MCVE.TEST.ID</code>.
+     * The column <code>PUBLIC.TEST.DOMAINTSVALUE</code>.
      */
-    public final TableField<TestRecord, Integer> ID = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<TestRecord, OffsetDateTime> DOMAINTSVALUE = createField(DSL.name("DOMAINTSVALUE"), org.jooq.mcve.java.Domains.DOMAINTS.getDataType(), this, "");
 
     /**
-     * The column <code>MCVE.TEST.VALUE</code>.
+     * The column <code>PUBLIC.TEST.LOCALTSVALUE</code>.
      */
-    public final TableField<TestRecord, Integer> VALUE = createField(DSL.name("VALUE"), SQLDataType.INTEGER, this, "");
+    public final TableField<TestRecord, OffsetDateTime> LOCALTSVALUE = createField(DSL.name("LOCALTSVALUE"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
 
     private Test(Name alias, Table<TestRecord> aliased) {
         this(alias, aliased, null);
@@ -66,21 +62,21 @@ public class Test extends TableImpl<TestRecord> {
     }
 
     /**
-     * Create an aliased <code>MCVE.TEST</code> table reference
+     * Create an aliased <code>PUBLIC.TEST</code> table reference
      */
     public Test(String alias) {
         this(DSL.name(alias), TEST);
     }
 
     /**
-     * Create an aliased <code>MCVE.TEST</code> table reference
+     * Create an aliased <code>PUBLIC.TEST</code> table reference
      */
     public Test(Name alias) {
         this(alias, TEST);
     }
 
     /**
-     * Create a <code>MCVE.TEST</code> table reference
+     * Create a <code>PUBLIC.TEST</code> table reference
      */
     public Test() {
         this(DSL.name("TEST"), null);
@@ -92,22 +88,7 @@ public class Test extends TableImpl<TestRecord> {
 
     @Override
     public Schema getSchema() {
-        return Mcve.MCVE;
-    }
-
-    @Override
-    public Identity<TestRecord, Integer> getIdentity() {
-        return (Identity<TestRecord, Integer>) super.getIdentity();
-    }
-
-    @Override
-    public UniqueKey<TestRecord> getPrimaryKey() {
-        return Keys.PK_TEST;
-    }
-
-    @Override
-    public List<UniqueKey<TestRecord>> getKeys() {
-        return Arrays.<UniqueKey<TestRecord>>asList(Keys.PK_TEST);
+        return Public.PUBLIC;
     }
 
     @Override
@@ -141,7 +122,7 @@ public class Test extends TableImpl<TestRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, Integer> fieldsRow() {
+    public Row2<OffsetDateTime, OffsetDateTime> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 }

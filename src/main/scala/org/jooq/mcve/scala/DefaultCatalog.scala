@@ -25,12 +25,12 @@ object DefaultCatalog {
 class DefaultCatalog extends CatalogImpl("") {
 
   /**
-   * The schema <code>MCVE</code>.
+   * The schema <code>PUBLIC</code>.
    */
-  lazy val MCVE = Mcve.MCVE
+  def PUBLIC = Public.PUBLIC
 
   override def getSchemas: List[Schema] = {
     return Arrays.asList[Schema](
-      Mcve.MCVE)
+      Public.PUBLIC)
   }
 }

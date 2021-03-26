@@ -4,11 +4,10 @@
 package org.jooq.mcve.kotlin.tables
 
 
-import kotlin.collections.List
+import java.time.OffsetDateTime
 
 import org.jooq.Field
 import org.jooq.ForeignKey
-import org.jooq.Identity
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Row2
@@ -16,13 +15,11 @@ import org.jooq.Schema
 import org.jooq.Table
 import org.jooq.TableField
 import org.jooq.TableOptions
-import org.jooq.UniqueKey
 import org.jooq.impl.DSL
 import org.jooq.impl.Internal
 import org.jooq.impl.SQLDataType
 import org.jooq.impl.TableImpl
-import org.jooq.mcve.kotlin.Mcve
-import org.jooq.mcve.kotlin.keys.PK_TEST
+import org.jooq.mcve.kotlin.Public
 import org.jooq.mcve.kotlin.tables.records.TestRecord
 
 
@@ -38,7 +35,7 @@ open class Test(
     parameters: Array<Field<*>?>?
 ): TableImpl<TestRecord>(
     alias,
-    Mcve.MCVE,
+    Public.PUBLIC,
     child,
     path,
     aliased,
@@ -49,7 +46,7 @@ open class Test(
     companion object {
 
         /**
-         * The reference instance of <code>MCVE.TEST</code>
+         * The reference instance of <code>PUBLIC.TEST</code>
          */
         val TEST = Test()
     }
@@ -60,38 +57,35 @@ open class Test(
     override fun getRecordType(): Class<TestRecord> = TestRecord::class.java
 
     /**
-     * The column <code>MCVE.TEST.ID</code>.
+     * The column <code>PUBLIC.TEST.DOMAINTSVALUE</code>.
      */
-    val ID: TableField<TestRecord, Int?> = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false).identity(true), this, "")
+    val DOMAINTSVALUE: TableField<TestRecord, OffsetDateTime?> = createField(DSL.name("DOMAINTSVALUE"), org.jooq.mcve.kotlin.domains.DOMAINTS.getDataType(), this, "")
 
     /**
-     * The column <code>MCVE.TEST.VALUE</code>.
+     * The column <code>PUBLIC.TEST.LOCALTSVALUE</code>.
      */
-    val VALUE: TableField<TestRecord, Int?> = createField(DSL.name("VALUE"), SQLDataType.INTEGER, this, "")
+    val LOCALTSVALUE: TableField<TestRecord, OffsetDateTime?> = createField(DSL.name("LOCALTSVALUE"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "")
 
     private constructor(alias: Name, aliased: Table<TestRecord>?): this(alias, null, null, aliased, null)
     private constructor(alias: Name, aliased: Table<TestRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, aliased, parameters)
 
     /**
-     * Create an aliased <code>MCVE.TEST</code> table reference
+     * Create an aliased <code>PUBLIC.TEST</code> table reference
      */
     constructor(alias: String): this(DSL.name(alias))
 
     /**
-     * Create an aliased <code>MCVE.TEST</code> table reference
+     * Create an aliased <code>PUBLIC.TEST</code> table reference
      */
     constructor(alias: Name): this(alias, null)
 
     /**
-     * Create a <code>MCVE.TEST</code> table reference
+     * Create a <code>PUBLIC.TEST</code> table reference
      */
     constructor(): this(DSL.name("TEST"), null)
 
     constructor(child: Table<out Record>, key: ForeignKey<out Record, TestRecord>): this(Internal.createPathAlias(child, key), child, key, TEST, null)
-    override fun getSchema(): Schema = Mcve.MCVE
-    override fun getIdentity(): Identity<TestRecord, Int?> = super.getIdentity() as Identity<TestRecord, Int?>
-    override fun getPrimaryKey(): UniqueKey<TestRecord> = PK_TEST
-    override fun getKeys(): List<UniqueKey<TestRecord>> = listOf(PK_TEST)
+    override fun getSchema(): Schema = Public.PUBLIC
     override fun `as`(alias: String): Test = Test(DSL.name(alias), this)
     override fun `as`(alias: Name): Test = Test(alias, this)
 
@@ -108,5 +102,5 @@ open class Test(
     // -------------------------------------------------------------------------
     // Row2 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row2<Int?, Int?> = super.fieldsRow() as Row2<Int?, Int?>
+    override fun fieldsRow(): Row2<OffsetDateTime?, OffsetDateTime?> = super.fieldsRow() as Row2<OffsetDateTime?, OffsetDateTime?>
 }

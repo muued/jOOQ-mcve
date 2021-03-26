@@ -5,14 +5,11 @@ package org.jooq.mcve.scala.tables
 
 
 import java.lang.Class
-import java.lang.Integer
 import java.lang.String
-import java.util.Arrays
-import java.util.List
+import java.time.OffsetDateTime
 
 import org.jooq.Field
 import org.jooq.ForeignKey
-import org.jooq.Identity
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Row2
@@ -20,13 +17,11 @@ import org.jooq.Schema
 import org.jooq.Table
 import org.jooq.TableField
 import org.jooq.TableOptions
-import org.jooq.UniqueKey
 import org.jooq.impl.DSL
 import org.jooq.impl.Internal
 import org.jooq.impl.SQLDataType
 import org.jooq.impl.TableImpl
-import org.jooq.mcve.scala.Keys
-import org.jooq.mcve.scala.Mcve
+import org.jooq.mcve.scala.Public
 import org.jooq.mcve.scala.tables.records.TestRecord
 
 import scala.Array
@@ -35,7 +30,7 @@ import scala.Array
 object Test {
 
   /**
-   * The reference instance of <code>MCVE.TEST</code>
+   * The reference instance of <code>PUBLIC.TEST</code>
    */
   val TEST = new Test
 }
@@ -52,7 +47,7 @@ class Test(
 )
 extends TableImpl[TestRecord](
   alias,
-  Mcve.MCVE,
+  Public.PUBLIC,
   child,
   path,
   aliased,
@@ -67,41 +62,35 @@ extends TableImpl[TestRecord](
   override def getRecordType: Class[TestRecord] = classOf[TestRecord]
 
   /**
-   * The column <code>MCVE.TEST.ID</code>.
+   * The column <code>PUBLIC.TEST.DOMAINTSVALUE</code>.
    */
-  val ID: TableField[TestRecord, Integer] = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false).identity(true), "")
+  val DOMAINTSVALUE: TableField[TestRecord, OffsetDateTime] = createField(DSL.name("DOMAINTSVALUE"), org.jooq.mcve.scala.Domains.DOMAINTS.getDataType(), "")
 
   /**
-   * The column <code>MCVE.TEST.VALUE</code>.
+   * The column <code>PUBLIC.TEST.LOCALTSVALUE</code>.
    */
-  val VALUE: TableField[TestRecord, Integer] = createField(DSL.name("VALUE"), SQLDataType.INTEGER, "")
+  val LOCALTSVALUE: TableField[TestRecord, OffsetDateTime] = createField(DSL.name("LOCALTSVALUE"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), "")
 
   private def this(alias: Name, aliased: Table[TestRecord]) = this(alias, null, null, aliased, null)
 
   /**
-   * Create an aliased <code>MCVE.TEST</code> table reference
+   * Create an aliased <code>PUBLIC.TEST</code> table reference
    */
   def this(alias: String) = this(DSL.name(alias), org.jooq.mcve.scala.tables.Test.TEST)
 
   /**
-   * Create an aliased <code>MCVE.TEST</code> table reference
+   * Create an aliased <code>PUBLIC.TEST</code> table reference
    */
   def this(alias: Name) = this(alias, org.jooq.mcve.scala.tables.Test.TEST)
 
   /**
-   * Create a <code>MCVE.TEST</code> table reference
+   * Create a <code>PUBLIC.TEST</code> table reference
    */
   def this() = this(DSL.name("TEST"), null)
 
   def this(child: Table[_ <: Record], key: ForeignKey[_ <: Record, TestRecord]) = this(Internal.createPathAlias(child, key), child, key, org.jooq.mcve.scala.tables.Test.TEST, null)
 
-  override def getSchema: Schema = Mcve.MCVE
-
-  override def getIdentity: Identity[TestRecord, Integer] = super.getIdentity.asInstanceOf[ Identity[TestRecord, Integer] ]
-
-  override def getPrimaryKey: UniqueKey[TestRecord] = Keys.PK_TEST
-
-  override def getKeys: List[ UniqueKey[TestRecord] ] = Arrays.asList[ UniqueKey[TestRecord] ](Keys.PK_TEST)
+  override def getSchema: Schema = Public.PUBLIC
   override def as(alias: String): Test = new Test(DSL.name(alias), this)
   override def as(alias: Name): Test = new Test(alias, this)
 
@@ -118,5 +107,5 @@ extends TableImpl[TestRecord](
   // -------------------------------------------------------------------------
   // Row2 type methods
   // -------------------------------------------------------------------------
-  override def fieldsRow: Row2[Integer, Integer] = super.fieldsRow.asInstanceOf[ Row2[Integer, Integer] ]
+  override def fieldsRow: Row2[OffsetDateTime, OffsetDateTime] = super.fieldsRow.asInstanceOf[ Row2[OffsetDateTime, OffsetDateTime] ]
 }

@@ -24,11 +24,11 @@ open class DefaultCatalog : CatalogImpl("") {
     }
 
     /**
-     * The schema <code>MCVE</code>.
+     * The schema <code>PUBLIC</code>.
      */
-    val MCVE get() = Mcve.MCVE
+    val PUBLIC get() = Public.PUBLIC
 
     override fun getSchemas(): List<Schema> = listOf(
-        Mcve.MCVE
+        Public.PUBLIC
     )
 }

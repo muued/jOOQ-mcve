@@ -4,11 +4,17 @@
 package org.jooq.mcve.kotlin.tables.references
 
 
+import org.jooq.mcve.kotlin.tables.FlywaySchemaHistory
 import org.jooq.mcve.kotlin.tables.Test
 
 
 
 /**
- * The table <code>MCVE.TEST</code>.
+ * The table <code>PUBLIC.flyway_schema_history</code>.
+ */
+val FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
+
+/**
+ * The table <code>PUBLIC.TEST</code>.
  */
 val TEST = Test.TEST

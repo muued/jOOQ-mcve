@@ -4,16 +4,22 @@
 package org.jooq.mcve.scala
 
 
+import org.jooq.mcve.scala.tables.FlywaySchemaHistory
 import org.jooq.mcve.scala.tables.Test
 
 
 /**
- * Convenience access to all tables in MCVE.
+ * Convenience access to all tables in PUBLIC.
  */
 object Tables {
 
   /**
-   * The table <code>MCVE.TEST</code>.
+   * The table <code>PUBLIC.flyway_schema_history</code>.
    */
-  lazy val TEST = Test.TEST
+  def FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
+
+  /**
+   * The table <code>PUBLIC.TEST</code>.
+   */
+  def TEST = Test.TEST
 }
